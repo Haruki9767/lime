@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A Nuxt 4 static site presenting the four reusable skills in this repository: Guidance, Web Design, Web Engineer, and SEO Production Audit.
+A Nuxt 4 static site presenting the four reusable Lime Skills in this repository: Guidance, Web Design, Web Engineer, and SEO Production Audit.
 
 ## Current state
 
@@ -16,7 +16,7 @@ A Nuxt 4 static site presenting the four reusable skills in this repository: Gui
 
 ## Design decisions
 
-- Palette: black, dark green, white, and a single acid-green accent; no gradients.
+- Palette: solid black, dark green, and white; no gradients or light-green accents.
 - Typography: bundled Departure Mono at `lime/public/fonts/DepartureMono-1.500.woff2` for headings and UI labels; Handlee for paragraphs.
 - Visual language: editorial field guide / terminal index with sharp edges, ruled lines, solid black backgrounds, dark-green surfaces, white surfaces, and restrained motion.
 - SEO: canonical HTTPS URLs, explicit page metadata, robots, sitemap, and noindex for errors.

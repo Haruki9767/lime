@@ -1,10 +1,10 @@
 <script setup lang="ts">
 useHead({
-  titleTemplate: (title) => title ? `${title} — AI Skills` : 'AI Skills — a field guide for better web work',
+  titleTemplate: (title) => title ? `${title} — Lime Skills` : 'Lime Skills — a field guide for better web work',
   meta: [
     { name: 'description', content: 'A compact field guide to the reusable Guidance, Web Design, Web Engineer, and SEO Production Audit skills in the skills repository.' },
     { name: 'theme-color', content: '#0b0f0c' },
-    { property: 'og:site_name', content: 'AI Skills' },
+    { property: 'og:site_name', content: 'Lime Skills' },
     { property: 'og:type', content: 'website' },
     { name: 'twitter:card', content: 'summary' }
   ],
@@ -15,7 +15,7 @@ useHead({
 <template>
   <div class="site-shell">
     <header class="site-header">
-      <NuxtLink class="brand" to="/" aria-label="AI Skills home"><span class="brand-mark">[</span>ai skills<span class="brand-mark">]</span></NuxtLink>
+      <NuxtLink class="brand" to="/" aria-label="Lime Skills home"><span class="brand-mark">[</span>lime skills<span class="brand-mark">]</span></NuxtLink>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#skills">Index</a>
         <a href="#about">About</a>

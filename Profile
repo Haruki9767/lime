@@ -1,0 +1,40 @@
+# Lime Skills repository profile
+
+## Identity
+
+- Project: Lime Skills
+- Repository: `Haruki9767/lime`
+- Public site: `https://lime.isroot.in`
+- Purpose: reusable, platform-neutral skills for AI-assisted web work
+
+## Skill packages
+
+Load only these top-level directories as skills because they contain `SKILL.md`:
+
+- `guidance/`
+- `web-design/`
+- `web-engineer/`
+- `seo-production-audit/`
+
+Ignore `lime/` during skill discovery. It is the Nuxt/Vue website and deployment project, not a skill package.
+
+## Web project profile
+
+- Framework: Nuxt 4 / Vue 3
+- Runtime: Node.js 22
+- Package manager: pnpm 11
+- Web project path: `lime/`
+- Static build: `cd lime && pnpm generate`
+- Typecheck: `cd lime && pnpm typecheck`
+- Deployment workflow: `.github/workflows/lime-pages.yml`
+- Environment variables: none currently required
+
+## AI working rules
+
+1. Read the relevant skill `SKILL.md` before making changes in that domain.
+2. Treat `lime/` as a separate frontend project; do not load its files as skill instructions.
+3. Preserve the existing four-package skill structure and frontmatter.
+4. Prefer pnpm and use the committed `lime/pnpm-lock.yaml` for the website.
+5. Run `cd lime && pnpm typecheck && pnpm generate` after web changes.
+6. Never commit secrets, `.env` files, generated `.nuxt/` output, or `.output/` output.
+7. Keep deployment and environment changes documented in `DEPLOYMENT.md`.

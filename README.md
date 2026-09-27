@@ -1,6 +1,6 @@
-# AI Skills
+# Lime Skills
 
-Reusable, platform-neutral AI skills maintained in this repository. Each package can be adapted to an assistant’s project instructions, system prompt, or local skill directory.
+Reusable, platform-neutral Lime Skills maintained in this repository. Each package can be adapted to an assistant’s project instructions, system prompt, or local skill directory.
 
 ## Included skills
 
@@ -11,7 +11,7 @@ Reusable, platform-neutral AI skills maintained in this repository. Each package
 
 ## Site
 
-The public field guide lives in [`lime/`](./lime/) and is built with Nuxt 4 and Vue 3 at [lime.isroot.in](https://lime.isroot.in). It uses Departure Mono for headings and Handlee for paragraphs, with a black, dark green, white, and acid-green palette.
+The public field guide lives in [`lime/`](./lime/) and is built with Nuxt 4 and Vue 3 at [lime.isroot.in](https://lime.isroot.in). It uses bundled Departure Mono for headings and Handlee for paragraphs, with a solid black, dark green, and white palette.
 
 > **AI discovery boundary:** ignore `lime/` when looking for skills. It is the web project, not a skill package. Load only the top-level directories that contain a `SKILL.md`; the authoritative set is `guidance`, `web-design`, `web-engineer`, and `seo-production-audit`.
 
@@ -24,6 +24,10 @@ pnpm generate
 ```
 
 Deployment settings, environment variables, DNS, and post-deploy checks are documented in [`DEPLOYMENT.md`](./DEPLOYMENT.md).
+
+## AI setup
+
+Use [`Profile`](./Profile) for the repository boundary, tooling, and AI working rules. [`requirement.txt`](./requirement.txt) lists the expected runtime and package-manager versions, while [`guide.md`](./guide.md) explains how to route work through the skills. A portable archive of the four skill entrypoints is available as [`skillmd.zip`](./skillmd.zip).
 
 ## License
 

@@ -3,12 +3,12 @@ import { skills } from '~/data/skills'
 
 useSeoMeta({
   title: 'A field guide for better web work',
-  description: 'Four reusable AI skills for coordinating, designing, engineering, and auditing web projects.',
-  ogTitle: 'AI Skills — a field guide for better web work',
-  ogDescription: 'Four reusable AI skills for better web projects.',
+  description: 'Four reusable Lime Skills for coordinating, designing, engineering, and auditing web projects.',
+  ogTitle: 'Lime Skills — a field guide for better web work',
+  ogDescription: 'Four reusable Lime Skills for better web projects.',
   ogUrl: 'https://lime.isroot.in/',
-  twitterTitle: 'AI Skills — a field guide for better web work',
-  twitterDescription: 'Four reusable AI skills for better web projects.'
+  twitterTitle: 'Lime Skills — a field guide for better web work',
+  twitterDescription: 'Four reusable Lime Skills for better web projects.'
 })
 
 const query = ref('')

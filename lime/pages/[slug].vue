@@ -8,7 +8,7 @@ if (!skill.value) throw createError({ statusCode: 404, statusMessage: 'Skill not
 useSeoMeta({
   title: skill.value?.name || 'Skill not found',
   description: skill.value?.description || 'The requested AI skill could not be found.',
-  ogTitle: skill.value ? `${skill.value.name} — AI Skills` : 'Skill not found — AI Skills',
+  ogTitle: skill.value ? `${skill.value.name} — Lime Skills` : 'Skill not found — Lime Skills',
   ogDescription: skill.value?.description,
   ogUrl: `https://lime.isroot.in/${route.params.slug}`
 })

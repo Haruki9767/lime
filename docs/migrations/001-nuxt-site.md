@@ -2,13 +2,14 @@
 
 ## Context
 
-The repository previously contained skill packages and no public web application. This change adds a static Nuxt site that makes those packages discoverable at `lime.isroot.in`.
+The repository previously contained skill packages and no public web application. This change adds a static Nuxt site that makes those packages discoverable at `lime.isroot.in` under the Lime Skills brand.
 
 ## Scope
 
 - Add a Nuxt 4 / Vue 3 frontend under the `lime/` directory.
 - Add public routes for the home page and each of the four skills.
 - Add metadata, robots, sitemap, favicon, custom 404/error handling, and a MIT license.
+- Add the uploaded Lime Skills favicon set, an AI-facing `Profile`, `requirement.txt`, and usage `guide.md`.
 - Add `DEPLOYMENT.md` and update `guidance/SKILL.md` so deployment notes are required for future projects.
 
 ## Compatibility and rollout
