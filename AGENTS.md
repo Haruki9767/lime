@@ -9,4 +9,4 @@
 
 ## Web project boundary
 
-The `lime/` directory contains the public Nuxt site. Work on it only when the task explicitly concerns the website, its deployment, or its GitHub Pages workflow. Use `lime/README.md` and the root `DEPLOYMENT.md` when available for web-project context.
+The `lime/` directory contains the public Nuxt site. Work on it only when the task explicitly concerns the website, its deployment, or its GitHub Pages workflow. Do not infer skill instructions from the web project.
