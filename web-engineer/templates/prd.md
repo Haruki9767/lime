@@ -54,7 +54,7 @@ This work must not change the visual design, layout, typography, colors, imagery
 
 ## 7. Design, SEO, and accessibility
 
-Follow the supplied framework, font, and design direction. Search for and follow the current `ai-slop-pattern-looker` skill when available. Define route classification, indexability, title/description/canonical policy, Open Graph/Twitter metadata, sitemap/robots rules, heading/image/form requirements, WCAG 2.2 scope and target, manual checks, and deployment URL. Never make private data indexable to improve SEO.
+Follow the supplied framework, font, and design direction. Search for and follow the current `web-design` skill when available. Define route classification, indexability, title/description/canonical policy, Open Graph/Twitter metadata, sitemap/robots rules, heading/image/form requirements, WCAG 2.2 scope and target, manual checks, and deployment URL. Never make private data indexable to improve SEO.
 
 ## 8. Security, privacy, and policy
 
@@ -102,7 +102,7 @@ Record missing information here, but ask the user before implementation when the
 ## 15. Final acceptance checklist
 
 - [ ] User supplied or confirmed framework, fonts, design direction, and other material inputs.
-- [ ] Current `ai-slop-pattern-looker` skill was searched and read if available.
+- [ ] Current `web-design` skill was searched and read if available.
 - [ ] Protected design/backend/auth/deployment boundaries were respected.
 - [ ] pnpm or an explicit repository exception was used consistently with the authoritative lockfile.
 - [ ] PR checks run on proposed changes and default-branch changes.

@@ -20,7 +20,7 @@
 | Production URL | [URL or TBD] | [User/repository/live check] |
 | Indexability policy | [Public/private/noindex or TBD] | [Route evidence] |
 | Framework/fonts/design preferences | [value or TBD] | [User/project] |
-| `ai-slop-pattern-looker` | [Found/read or searched/unavailable] | [Path/date] |
+| `web-design` | [Found/read or searched/unavailable] | [Path/date] |
 | Design changes authorized? | [Yes/no] | [User instruction] |
 | Backend/API/database changes authorized? | [Yes/no] | [User instruction] |
 | Push authorized? | [Yes/no/branch] | [User instruction] |

@@ -25,7 +25,7 @@ Use `TBD` in reports only after the user has authorized a report despite missing
 
 ## Preference intake
 
-Before making a web experience, collect and follow the framework/version, font preferences and fallbacks, visual taste, layout/density, color, motion, imagery, examples the user likes/dislikes, audience, product goal, responsive behavior, and accessibility expectations. Search for the current `ai-slop-pattern-looker` skill before visual/frontend work; if absent, record that it was searched for and unavailable.
+Before making a web experience, collect and follow the framework/version, font preferences and fallbacks, visual taste, layout/density, color, motion, imagery, examples the user likes/dislikes, audience, product goal, responsive behavior, and accessibility expectations. Search for the current `web-design` skill before visual/frontend work; if absent, record that it was searched for and unavailable.
 
 ## Design-preservation rule
 
