@@ -108,7 +108,7 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 | `scan_slop_signals.py` | Reviewed | Candidate translucency/halo signals are intentional; no green/gradient styles |
 | `git diff --check` | Pass | No whitespace errors |
 | Lint, unit tests, typecheck | Not configured | No such scripts remain/are present; generation is the project build gate |
-| Live GitHub Pages deployment/status | Pending until the requested push completes | Verify Actions run, HTTPS route, and actual unknown-path status after deployment |
+| GitHub Pages deployment status | Pass for follow-up commit `36cf36b`; Pages build/deploy and Skills Quality workflows succeeded | Custom-domain HTTPS/404 status not checked; DNS/domain settings were not changed per user request |
 
 ## Changes made
 
@@ -126,7 +126,7 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 
 - `og:image` is still absent; add a branded social image if the owner wants richer link previews.
 - Handlee remains an externally fetched Google Font. Assess whether self-hosting or a notice is appropriate for the site’s actual visitor jurisdictions; this is not legal advice.
-- Live DNS, GitHub Pages repository settings, HTTPS enforcement, response headers, and the live custom 404 HTTP status are not source-verifiable; check the public deployment after the Actions run.
+- DNS/CNAME/domain settings were intentionally not inspected or changed per user request. The Pages workflow succeeded, but GitHub Pages repository settings, custom-domain HTTPS enforcement, response headers, and live custom-404 HTTP status remain unverified.
 - No dedicated unit/lint/typecheck scripts exist. Reduced-motion behavior was exercised through Chromium media emulation, not by changing a host operating-system preference.
 - Nuxt’s production generation emitted non-blocking upstream Rollup/H3 warnings; generation completed successfully.
 
