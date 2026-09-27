@@ -1,6 +1,6 @@
 ---
 name: guidance
-description: Coordinate web-project work across the repository’s skills, classify frontend versus backend scope, protect architecture and API logic, enforce maintainable file boundaries, document migrations, deployment, and AI handoffs, and deliver a tested skeleton before visual refinement. Use before adding features, changing architecture, switching agents, or coordinating web-design, web-engineer, and SEO work.
+description: Coordinate web-project work across repository skills, classify frontend versus backend scope, protect architecture and API logic, track current tasks in TODO.md, record completed work in CHANGES.md, document migrations/deployment/AI handoffs, and deliver a tested skeleton before visual refinement. Use before adding features, changing architecture, switching agents, or coordinating web-design, web-engineer, and SEO work.
 ---
 
 # Guidance
@@ -52,6 +52,14 @@ Use clear domain-oriented file boundaries instead of a single giant component, r
 
 Adapt the layout to the existing repository; do not reorganize everything for aesthetics. Keep modules cohesive, APIs explicit, imports acyclic where practical, and tests next to the behavior they protect. Prefer pnpm over npm when the project uses Node, and preserve one intentional lockfile authority.
 
+### Track progress and completed changes
+
+For application or project work that modifies files, create or update `TODO.md` and `CHANGES.md` at the affected project root, unless the user opts out or the repository defines an established equivalent. In a monorepo, use the specific package root for isolated work and the repository root when changes span packages. Reuse existing trackers and preserve unrelated entries.
+
+- `TODO.md` is the live task list. Break the request into actionable checkboxes, show what is in progress, update it as work advances, and mark tasks done only after verification. Keep unfinished or deferred work visible.
+- `CHANGES.md` is an append-only history. Add a dated heading for each completed task and list all actual changes, including affected files/features/fixes and relevant validation, commit, or deployment status. Separate completed work from deferred items; never record planned work as completed or claim unverified results.
+- Keep both files concise and free of secrets. Do not create empty trackers for read-only/advisory work or add project trackers inside skill packages; follow the skill-authoring rules when editing a skill itself.
+
 ## 6. Build the skeleton before refinement
 
 Start with a design and behavior skeleton: route map, page/frame hierarchy, content blocks, component boundaries, data states, API seams, permissions, and responsive structure. Use real semantic elements and representative content, but keep styling intentionally plain. Confirm the skeleton supports the primary task, correct navigation, states, and backend boundary before adding fonts, imagery, polished tokens, animation, glassmorphism, skeuomorphism, or other visual treatments.
@@ -77,12 +85,14 @@ Never put secrets, tokens, private customer data, or copied credentials in `AI_C
 1. Read the current relevant skills and repository contribution rules.
 2. Classify frontend/backend/hybrid and collect backend configuration before backend work.
 3. Inventory files, routes, data flows, trust boundaries, scripts, tests, lockfiles, and workflows.
-4. Write or update `AI_CONTEXT.md` for a substantial task and a migration document when the change qualifies.
-5. Implement the semantic skeleton with separate maintainable modules.
-6. Run focused tests and logic checks; then run lint, typecheck, build, security, and relevant specialist audits.
-7. Verify honeypot/challenge behavior server-side, accessibility, rate limits, error states, API status/schema compatibility, and secret redaction when abuse protection is in scope.
-8. Re-read `web-design`, `web-engineer`, and `seo-production-audit` after implementation when relevant; fix the findings that are within the approved scope, and re-run affected checks.
-9. Inspect the diff, verify docs and files exist, check for secrets/generated artifacts, and report what was verified, what was not, and remaining decisions.
+4. For file-changing application/project work, create or update the project-root `TODO.md` before implementation and keep its progress current.
+5. Write or update `AI_CONTEXT.md` for a substantial task and a migration document when the change qualifies.
+6. Implement the semantic skeleton with separate maintainable modules.
+7. Run focused tests and logic checks; then run lint, typecheck, build, security, and relevant specialist audits.
+8. Verify honeypot/challenge behavior server-side, accessibility, rate limits, error states, API status/schema compatibility, and secret redaction when abuse protection is in scope.
+9. Re-read `web-design`, `web-engineer`, and `seo-production-audit` after implementation when relevant; fix the findings that are within the approved scope, and re-run affected checks.
+10. Before handoff, finalize `TODO.md` and append the verified file/change/test summary to `CHANGES.md` for application/project work.
+11. Inspect the diff, verify docs and files exist, check for secrets/generated artifacts, and report what was verified, what was not, and remaining decisions.
 
 ## References and templates
 
@@ -91,8 +101,9 @@ Never put secrets, tokens, private customer data, or copied credentials in `AI_C
 - `templates/AI_CONTEXT.md` — AI-to-AI project handoff template.
 - `templates/FEATURE_PLAN.md` — skeleton-first feature planning template.
 - `templates/project-quality.yml` — provider-neutral project quality workflow to adapt after inspecting an existing CI setup.
+- Project-root `TODO.md` and `CHANGES.md` — live progress and append-only record of completed work for application/project changes.
 - `scripts/check_skill_repo.py` — deterministic validation used by this repository’s GitHub workflow.
 
 ## Completion checklist
 
-Before stopping, verify that current specialist skills and contribution rules were searched; feature scope was classified; backend configuration was requested before backend work; frontend/backend/API logic and trust boundaries were checked; honeypot/challenge choices are layered, server-validated, accessible, and privacy-reviewed; files are separated by responsibility; skeleton behavior was verified before refinement; migration, deployment, and AI context docs were created when required; relevant specialist checks passed or limitations are explicit; and no secrets or unauthorized changes were introduced.
+Before stopping, verify that current specialist skills and contribution rules were searched; feature scope was classified; backend configuration was requested before backend work; frontend/backend/API logic and trust boundaries were checked; honeypot/challenge choices are layered, server-validated, accessible, and privacy-reviewed; files are separated by responsibility; skeleton behavior was verified before refinement; `TODO.md` reflects current/completed tasks and `CHANGES.md` records actual verified changes when applicable; migration, deployment, and AI context docs were created when required; relevant specialist checks passed or limitations are explicit; and no secrets or unauthorized changes were introduced.
