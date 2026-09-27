@@ -1,0 +1,6 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "exclude": [
+    "web-design/references/archive-assets/**"
+  ]
+}
