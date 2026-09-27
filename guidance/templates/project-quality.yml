@@ -1,0 +1,46 @@
+# Adapt this workflow after inspecting the project’s existing CI, package manager, scripts, and trust boundaries.
+# Do not copy blindly or run backend migrations against production from CI.
+name: Project Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Validate formatting and diff
+        run: pnpm exec prettier --check .
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Test
+        run: pnpm test -- --runInBand
+      - name: Build
+        run: pnpm build
+      - name: Dependency audit
+        run: pnpm audit --audit-level=high
+      # Add project-specific API/database/authorization/integration checks here.
+      # Keep secrets out of pull_request jobs and use a separate protected environment for deploys.

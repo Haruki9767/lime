@@ -1,0 +1,65 @@
+name: Skills Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skills-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate skill packages and scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install validator dependency
+        run: python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Validate skill packages
+        run: |
+          set -eu
+          for skill_file in */SKILL.md; do
+            skill_dir="${skill_file%/SKILL.md}"
+            python - <<'PY' "$skill_dir"
+          import sys
+          from pathlib import Path
+          import yaml
+          skill = Path(sys.argv[1])
+          text = (skill / 'SKILL.md').read_text(encoding='utf-8')
+          if not text.startswith('---\n') or '\n---' not in text[4:]:
+              raise SystemExit(f'{skill}: invalid frontmatter')
+          end = text.find('\n---', 4)
+          meta = yaml.safe_load(text[4:end]) or {}
+          if meta.get('name') != skill.name:
+              raise SystemExit(f'{skill}: frontmatter name does not match directory')
+          if not meta.get('description'):
+              raise SystemExit(f'{skill}: missing description')
+          if len(text.splitlines()) > 500:
+              raise SystemExit(f'{skill}: SKILL.md exceeds 500 lines')
+          print(f'validated {skill}')
+          PY
+          done
+
+      - name: Run repository validator
+        run: python guidance/scripts/check_skill_repo.py
+
+      - name: Compile Python scripts
+        run: python -m compileall -q .
+
+      - name: Check whitespace errors
+        run: git diff --check
