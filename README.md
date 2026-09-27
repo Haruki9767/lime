@@ -13,6 +13,8 @@ Reusable, platform-neutral AI skills maintained in this repository. Each package
 
 The public field guide lives in [`lime/`](./lime/) and is built with Nuxt 4 and Vue 3 at [lime.isroot.in](https://lime.isroot.in). It uses Departure Mono for headings and Handlee for paragraphs, with a black, dark green, white, and acid-green palette.
 
+> **AI discovery boundary:** ignore `lime/` when looking for skills. It is the web project, not a skill package. Load only the top-level directories that contain a `SKILL.md`; the authoritative set is `guidance`, `web-design`, `web-engineer`, and `seo-production-audit`.
+
 ```bash
 cd lime
 pnpm install --frozen-lockfile

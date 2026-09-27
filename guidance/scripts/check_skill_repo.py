@@ -32,7 +32,10 @@ def frontmatter(text: str, path: Path) -> dict[str, str]:
 
 
 def main() -> None:
-    packages = sorted(p for p in ROOT.iterdir() if p.is_dir() and not p.name.startswith("."))
+    packages = sorted(
+        p for p in ROOT.iterdir()
+        if p.is_dir() and not p.name.startswith(".") and p.name != "lime"
+    )
     skills = [p for p in packages if (p / "SKILL.md").is_file()]
     if not skills:
         fail("No skill packages with SKILL.md were found")

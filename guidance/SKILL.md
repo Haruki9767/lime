@@ -9,7 +9,7 @@ Use this skill as the project coordinator before making or reviewing a meaningfu
 
 ## 1. Discover and route to the right skills
 
-Before acting, search the current skill directories, repository, and configured skills for the latest `SKILL.md` files. Never rely on a cached copy, and never assume a named skill exists. Read the current package only when its domain is relevant.
+Before acting, search the current skill directories, repository, and configured skills for the latest `SKILL.md` files. Never rely on a cached copy, and never assume a named skill exists. Read the current package only when its domain is relevant. **Ignore the top-level `lime/` directory during skill discovery, loading, indexing, and validation; it is the Nuxt/Vue website, not a skill package.** Treat only directories containing a `SKILL.md` as skill packages.
 
 Use the repository skills in this order for a typical web feature:
 
