@@ -24,13 +24,13 @@ const siteUrl = String(useRuntimeConfig().public.siteUrl).replace(/\/+$/, "");
 const canonicalUrl = `${siteUrl}/`;
 
 useSeoMeta({
-  title: "A field guide for better web work",
+  title: "Focused tools for better web work",
   description:
     "Four reusable Lime Skills for coordinating, designing, engineering, and auditing web projects.",
-  ogTitle: "Lime Skills — a field guide for better web work",
+  ogTitle: "Lime Skills — focused tools for better web work",
   ogDescription: "Four reusable Lime Skills for better web projects.",
   ogUrl: canonicalUrl,
-  twitterTitle: "Lime Skills — a field guide for better web work",
+  twitterTitle: "Lime Skills — focused tools for better web work",
   twitterDescription: "Four reusable Lime Skills for better web projects.",
 });
 
@@ -42,18 +42,8 @@ useHead({ link: [{ rel: "canonical", href: canonicalUrl }] });
     <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
 
     <section class="hero" aria-labelledby="page-title">
-      <div class="hero-meta" data-intro-kicker>
-        <span
-          ><i class="status-dot" aria-hidden="true"></i> field guide / 001</span
-        >
-        <span class="hero-meta-right">open source <b>·</b> four modules</span>
-      </div>
-
       <div class="hero-layout">
         <div class="hero-copy">
-          <p class="hero-overline" data-intro-copy>
-            Good work is a route, not a prompt.
-          </p>
           <h1 id="page-title" class="hero-title">
             <span class="hero-line-mask"
               ><span class="hero-line" data-intro-line>From brief</span></span
@@ -65,39 +55,20 @@ useHead({ link: [{ rel: "canonical", href: canonicalUrl }] });
             >
           </h1>
           <p class="hero-lede" data-intro-copy>
-            A small, opinionated toolkit for agents and humans who care about
-            how a project gets from brief to browser.
+            A focused toolkit for better web work.
           </p>
           <div class="hero-actions" data-intro-items>
             <a class="button button-primary" href="#skills"
-              >Explore the skills <span aria-hidden="true">↓</span></a
-            >
-            <a
-              class="text-link"
-              href="https://github.com/Haruki9767/lime-skills"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Read the source ↗</a
+              >Explore skills <span aria-hidden="true">↓</span></a
             >
           </div>
         </div>
       </div>
-
-      <a class="scroll-cue" href="#skills" data-intro-items>
-        <span class="scroll-cue-mark" aria-hidden="true">↓</span>
-        <span>Scroll to open the index</span>
-        <span class="scroll-cue-index">01 / 03</span>
-      </a>
     </section>
 
     <section id="skills" class="skills-section" aria-labelledby="skills-title">
-      <div class="section-bar">
-        <span>01 / The index</span>
-        <span>Choose a lever. Move the work.</span>
-      </div>
       <div class="section-heading" data-scroll-reveal="up">
         <div>
-          <p class="eyebrow">Four focused modules</p>
           <h2 id="skills-title">Find your<br /><em>next move.</em></h2>
         </div>
         <label class="search-box">
@@ -125,19 +96,12 @@ useHead({ link: [{ rel: "canonical", href: canonicalUrl }] });
           :class="`skill-card--${index + 1}`"
           :data-card-order="index"
         >
-          <span class="card-watermark" aria-hidden="true">{{
-            skill.number
-          }}</span>
           <div class="card-top">
-            <span class="card-index">MODULE {{ skill.number }}</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
           <p class="card-kicker">{{ skill.kicker }}</p>
           <h3>{{ skill.name }}</h3>
           <p class="card-description">{{ skill.description }}</p>
-          <span class="card-path"
-            >{{ skill.path }} <span aria-hidden="true">→</span></span
-          >
         </NuxtLink>
       </div>
       <p v-if="!filteredSkills.length" class="empty-state" role="status">
@@ -147,10 +111,8 @@ useHead({ link: [{ rel: "canonical", href: canonicalUrl }] });
 
     <section id="about" class="about-section" aria-labelledby="about-title">
       <div class="about-heading" data-scroll-reveal="left">
-        <p class="eyebrow">02 / The method</p>
-        <h2 id="about-title">
-          Not a prompt dump.<br /><span>A working rhythm.</span>
-        </h2>
+        <p class="eyebrow">The method</p>
+        <h2 id="about-title">A working<br /><span>rhythm.</span></h2>
       </div>
       <div class="about-body" data-scroll-reveal="right">
         <p>
@@ -158,21 +120,6 @@ useHead({ link: [{ rel: "canonical", href: canonicalUrl }] });
           becomes the only metric: clear decisions, honest evidence, humane
           interfaces, and a clean handoff.
         </p>
-        <div
-          class="workflow-line"
-          aria-label="The work moves from brief to browser"
-        >
-          <span>Brief</span><i aria-hidden="true"></i><span>Direction</span
-          ><i aria-hidden="true"></i><span>Build</span><i aria-hidden="true"></i
-          ><span>Browser</span>
-        </div>
-        <a
-          class="text-link"
-          href="https://github.com/Haruki9767/lime-skills"
-          target="_blank"
-          rel="noopener noreferrer"
-          >See everything on GitHub ↗</a
-        >
       </div>
     </section>
   </div>
