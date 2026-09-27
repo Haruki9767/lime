@@ -6,7 +6,7 @@ The repository previously contained skill packages and no public web application
 
 ## Scope
 
-- Add a Nuxt 4 / Vue 3 frontend at the repository root.
+- Add a Nuxt 4 / Vue 3 frontend under the `lime/` directory.
 - Add public routes for the home page and each of the four skills.
 - Add metadata, robots, sitemap, favicon, custom 404/error handling, and a MIT license.
 - Add `DEPLOYMENT.md` and update `guidance/SKILL.md` so deployment notes are required for future projects.
@@ -17,9 +17,9 @@ The existing skill directories remain the source of truth and are not renamed or
 
 ## Ordered rollout
 
-1. Install dependencies with `pnpm install --frozen-lockfile`.
-2. Run `pnpm typecheck` and `pnpm generate`.
-3. Connect the repository’s `main` branch to Cloudflare Pages using the settings in `DEPLOYMENT.md`.
+1. Install dependencies with `cd lime && pnpm install --frozen-lockfile`.
+2. Run `cd lime && pnpm typecheck && pnpm generate`.
+3. Connect the repository’s `main` branch to Cloudflare Pages or enable the GitHub Pages workflow using the settings in `DEPLOYMENT.md`.
 4. Attach `lime.isroot.in` and verify canonical routes, sitemap, robots, and a true 404.
 
 ## Rollback / forward fix

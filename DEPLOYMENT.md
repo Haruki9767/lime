@@ -1,6 +1,6 @@
 # Deployment guide
 
-This repository now contains a Nuxt 4 public site for `https://lime.isroot.in`.
+This repository now contains a Nuxt 4 public site in the `lime/` directory for `https://lime.isroot.in`.
 
 ## Recommended platform: Cloudflare Pages
 
@@ -14,13 +14,22 @@ Create a Pages project connected to `Haruki9767/skills` with:
 |---|---|
 | Framework preset | Nuxt.js (or None if the preset is unavailable) |
 | Production branch | `main` |
+| Root / working directory | `lime` |
 | Build command | `pnpm generate` |
 | Build output directory | `.output/public` |
 | Node.js version | `22` |
 | Package manager | `pnpm` |
 | Install command | `pnpm install --frozen-lockfile` |
 
-Commit the generated `pnpm-lock.yaml` and keep it as the only lockfile authority.
+The web project’s package manifest and lockfile are `lime/package.json` and `lime/pnpm-lock.yaml`. Keep that lockfile as the only lockfile authority for the web project.
+
+## GitHub Pages
+
+GitHub Pages deployment is automated by [`.github/workflows/lime-pages.yml`](./.github/workflows/lime-pages.yml). It runs when files in `lime/` change on `main`, installs dependencies from the `lime/` working directory, typechecks, generates `.output/public`, uploads the Pages artifact, and deploys it.
+
+In the repository’s **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. The workflow uses the `github-pages` environment and requires the standard Pages write and OIDC permissions already declared in the workflow.
+
+GitHub Pages is a suitable static host for this site. Cloudflare Pages remains the primary recommendation for custom-domain edge delivery and preview deployments; use one production host at a time to avoid conflicting DNS and canonical URL behavior.
 
 ## Environment variables
 
@@ -57,4 +66,4 @@ Expected results: `200` for the home page, `robots.txt`, and `sitemap.xml`; a tr
 - **Vercel:** use `pnpm generate` with output directory `.output/public`, or use Nuxt’s Vercel preset if server rendering is introduced later.
 - **Netlify:** use `pnpm generate` with publish directory `.output/public`.
 
-For the current static site, do not add an adapter or server preset solely for deployment.
+For the current static site, do not add an adapter or server preset solely for deployment. If the GitHub Pages project uses a repository subpath instead of the custom domain, add a Nuxt `app.baseURL` configuration for that path before deploying; `lime.isroot.in` uses the root path and does not need one.

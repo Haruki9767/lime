@@ -6,10 +6,10 @@ A Nuxt 4 static site presenting the four reusable skills in this repository: Gui
 
 ## Current state
 
-- Framework: Nuxt 4 / Vue 3
-- Package manager: pnpm
+- Framework: Nuxt 4 / Vue 3 in `lime/`
+- Package manager: pnpm, with `lime/pnpm-lock.yaml` as the web lockfile
 - Production URL: `https://lime.isroot.in`
-- Deployment: static generation via `pnpm generate`, recommended on Cloudflare Pages
+- Deployment: static generation via `cd lime && pnpm generate`; recommended on Cloudflare Pages, with GitHub Pages automation in `.github/workflows/lime-pages.yml`
 - Environment variables: none
 - Routes: `/`, `/guidance`, `/web-design`, `/web-engineer`, `/seo-production-audit`; unknown routes use `error.vue`
 - Source of truth for skill copy: the matching `SKILL.md` files; the UI summary data lives in `data/skills.ts`
@@ -24,6 +24,7 @@ A Nuxt 4 static site presenting the four reusable skills in this repository: Gui
 ## Commands
 
 ```bash
+cd lime
 pnpm install --frozen-lockfile
 pnpm typecheck
 pnpm generate

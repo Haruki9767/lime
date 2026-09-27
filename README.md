@@ -11,9 +11,10 @@ Reusable, platform-neutral AI skills maintained in this repository. Each package
 
 ## Site
 
-The public field guide is built with Nuxt 4 and Vue 3 at [lime.isroot.in](https://lime.isroot.in). It uses Departure Mono for headings and Handlee for paragraphs, with a black, dark green, white, and acid-green palette.
+The public field guide lives in [`lime/`](./lime/) and is built with Nuxt 4 and Vue 3 at [lime.isroot.in](https://lime.isroot.in). It uses Departure Mono for headings and Handlee for paragraphs, with a black, dark green, white, and acid-green palette.
 
 ```bash
+cd lime
 pnpm install --frozen-lockfile
 pnpm dev
 pnpm typecheck
