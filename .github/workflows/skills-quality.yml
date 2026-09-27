@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -58,8 +60,29 @@ jobs:
       - name: Run repository validator
         run: python guidance/scripts/check_skill_repo.py
 
-      - name: Compile Python scripts
-        run: python -m compileall -q .
+      - name: Run repository behavior tests
+        run: python -m unittest discover -s tests -v
 
-      - name: Check whitespace errors
-        run: git diff --check
+      - name: Compile Python scripts
+        run: python -m compileall -q guidance seo-production-audit web-design web-engineer tests
+
+      - name: Check committed patch whitespace
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_SHA: ${{ github.sha }}
+        run: |
+          set -eu
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            base="$PR_BASE"
+            head="$PR_HEAD"
+          elif [ "$EVENT_NAME" = "push" ] && [ "$PUSH_BEFORE" != "0000000000000000000000000000000000000000" ]; then
+            base="$PUSH_BEFORE"
+            head="$PUSH_SHA"
+          else
+            base="$(git rev-parse HEAD^)"
+            head="$(git rev-parse HEAD)"
+          fi
+          git diff --check "$base" "$head"

@@ -3,7 +3,7 @@
 ## Identity
 
 - Project: Lime Skills
-- Repository: `Haruki9767/lime`
+- Repository: `Haruki9767/lime-skills`
 - Purpose: reusable, platform-neutral skills for AI-assisted web work
 
 ## Skill packages
