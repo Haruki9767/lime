@@ -81,33 +81,6 @@ useHead({ link: [{ rel: "canonical", href: canonicalUrl }] });
             >
           </div>
         </div>
-
-        <nav
-          class="module-rail"
-          aria-label="Explore the four Lime Skills"
-          data-intro-rail
-        >
-          <div class="module-rail-head">
-            <span>Run of show</span>
-            <span>01 — 04</span>
-          </div>
-          <NuxtLink
-            v-for="skill in skills"
-            :key="skill.slug"
-            class="module-link"
-            :to="`/${skill.slug}`"
-            data-intro-rail-item
-          >
-            <span class="rail-number">{{ skill.number }}</span>
-            <span class="rail-name">{{ skill.name }}</span>
-            <span class="rail-arrow" aria-hidden="true">↗</span>
-          </NuxtLink>
-          <div class="module-rail-foot">
-            <span>BRIEF</span
-            ><span class="rail-connector" aria-hidden="true"></span
-            ><span>BROWSER</span>
-          </div>
-        </nav>
       </div>
 
       <a class="scroll-cue" href="#skills" data-intro-items>

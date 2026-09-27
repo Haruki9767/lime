@@ -30,7 +30,6 @@ export function useScrollAnimations(rootRef) {
           const introCopy = select("[data-intro-copy]");
           const introItems = select("[data-intro-items]");
           const rail = select("[data-intro-rail]");
-          const railItems = select("[data-intro-rail-item]");
           const revealItems = select("[data-scroll-reveal]");
           const cardGrid = select(".skill-grid")[0];
           const cards = select(".skill-card");
@@ -77,15 +76,6 @@ export function useScrollAnimations(rootRef) {
               0.22,
             );
           }
-          if (railItems.length) {
-            intro.fromTo(
-              railItems,
-              { x: 28, autoAlpha: 0.2, immediateRender: false },
-              { x: 0, autoAlpha: 1, duration: 0.48, stagger: 0.09 },
-              0.52,
-            );
-          }
-
           revealItems.forEach((element) => {
             const bounds = element.getBoundingClientRect();
             if (bounds.top < window.innerHeight * 0.82 && bounds.bottom > 0) {
