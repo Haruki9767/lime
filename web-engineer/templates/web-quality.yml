@@ -1,0 +1,33 @@
+# Adapt this provider-neutral checklist to the repository's CI system.
+# Preserve existing workflow conventions, design/backend scope, and secrets policy.
+# Prefer pnpm and follow package.json packageManager/devEngines.packageManager.
+triggers:
+  - pull_request
+  - push_to_default_branch
+permissions:
+  contents: read
+steps:
+  - name: Check out source
+    run: <provider checkout action>
+  - name: Set up Node.js and pnpm
+    run: <provider setup action that follows the project package-manager declaration>
+  - name: Install dependencies reproducibly
+    run: pnpm install --frozen-lockfile
+  - name: Validate changed files
+    run: git diff --check
+  - name: Check protected-scope changes
+    run: <fail if unauthorized design/backend/auth/database/deployment paths changed>
+  - name: Run tests
+    run: <project pnpm test command, if present>
+  - name: Run lint and type checks
+    run: <project pnpm lint/typecheck commands, if present>
+  - name: Build production output
+    run: <project pnpm build command, if present>
+  - name: Run SEO and accessibility checks
+    run: python3 /path/to/scan_web_quality.py --root . --origin <preferred-origin> --fail-on high
+  - name: Run dependency and security checks
+    run: pnpm audit --audit-level=high
+  - name: Scan for committed secrets
+    run: <repository-approved secret scanner, without printing secrets>
+  - name: Validate generated artifacts
+    run: <assert expected build, 404, robots, sitemap, and metadata artifacts>
