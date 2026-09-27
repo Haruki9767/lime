@@ -18,8 +18,9 @@ The Lime site was an existing Nuxt/Vue static site with authored TypeScript conf
 ## Target state
 
 - Authored site code uses Vue SFCs with plain JavaScript data and `.mjs` Nuxt configuration; no authored `.ts`/`.tsx` files remain.
-- The solid black/light-pink/white visual system replaces green/gradient styles while preserving existing fonts and core content.
-- GSAP reveals/progress are dynamically initialized after mount, scoped to the Vue page, cleaned up on unmount, and disabled when reduced motion is requested.
+- The solid black/light-pink/white visual system replaces green/gradient styles; an editorial hero, module rail, cards, and detail-page layout make the visual change more substantial while preserving fonts and core skill content.
+- A sequenced GSAP hero intro, scrubbed/staggered card reveal, and scroll progress are initialized after mount, scoped to the Vue page, cleaned up on unmount, and disabled when reduced motion is requested.
+- Vue Router resets new detail routes to the top after the page renders; intentional hash destinations still scroll to their section.
 - Detail canonicals and source links target the correct public URLs; index navigation works from detail pages.
 - `/404` is a noindex Vue route. `pnpm generate` derives a script-free root `404.html` from its prerendered markup and removes the unused `200.html` shell.
 - Pages build checks run on pull requests; only the deployment job receives Pages write/OIDC permissions.
@@ -51,12 +52,18 @@ The change is reversible through Git. Revert the change commit on `main` and all
 
 ## Verification
 
-- [x] Local tests: `pnpm install --frozen-lockfile`; `pnpm generate`; generated route/title/canonical/OG/H1 checks; sitemap parse; one-main error landmark assertion; script-free 404 and JavaScript-disabled render; search empty/recovery; direct detail route; real 390px viewport with no horizontal overflow, readable initial copy, and four cards visible after the GSAP scroll reveal; `git diff --check`.
+- [x] Local tests: frozen-lockfile install and `pnpm generate`; generated route metadata/404 checks; search filter and recovery; detail and next-module navigation from page bottom reset to `scrollY=0`; `/#skills` returns to the index anchor; early/mid/late ScrollTrigger samples show staggered opacity and movement; reduced-motion emulation leaves hero/cards visible; desktop and 390px mobile screenshots reviewed; `git diff --check`.
 - [x] Migration dry run: not applicable; no schema/data migration.
 - [x] Production-like validation: static artifact served locally; final production host check occurs after deployment.
 - [x] API/client compatibility: no API; five public URLs retained.
 - [x] Monitoring and alerts: GitHub Actions Pages run is the rollout signal; no runtime telemetry added.
 - [x] Security/privacy review: `pnpm audit --audit-level=high` clean; source scanner clean; Google Fonts third-party request remains noted in `SEO-SECURITY-AUDIT.md`.
+
+## Follow-up UX correction (2026-09-27)
+
+The user reported that the prior motion was not noticeable and that clicking a skill near the bottom of the index opened its detail page at the bottom. The issue was reproduced in a headless Chromium session: the home page was at `scrollY=2033`; after clicking Guidance, the detail page remained at `scrollY=489` and its hero began at `top=-341`. A Vue Router `afterEach` hook now waits for the new page to render, then resets non-hash navigation to the top while preserving `/#skills` behavior. The same bottom-origin test now ends at detail `scrollY=0` with the hero below the header; next-module navigation also starts at zero.
+
+The animation system now sequences the hero and module rail, applies a noticeable scrubbed 72px/staggered card reveal with a progress bar, and leaves first-screen content fully legible. Browser measurements at early/middle/late scroll progress showed the cards moving/fading in sequence. A reduced-motion emulation kept content visible with no hero transform. Search filtering, desktop/mobile screenshots, browser console, and the 390px responsive render were rechecked. Small pink utility text was darkened to `#b04d73` for 5.05:1 contrast on white. No DNS records or domain settings were changed, per the user’s instruction.
 
 ## Risks and ownership
 

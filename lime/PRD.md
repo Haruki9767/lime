@@ -53,6 +53,9 @@ The user asked to refresh the existing Lime site’s colors, move authored appli
 | WEB-006 | Social metadata | Low | Confirmed | No Open Graph image configured | Backlog; not required to fulfill the requested palette/migration |
 | WEB-008 | Motion/accessibility | Low | Confirmed | At 390px, a screenshot during page initialization showed primary copy mid-fade from transparent | Keep primary copy opaque during positional reveals; retain staggered fade on the skill cards |
 | WEB-009 | HTML semantics | Low | Confirmed | Vue 404/error views nested a `<main>` inside the app’s shared `<main>` | Replaced with named sections; generated error routes now have one main landmark |
+| WEB-010 | Motion design | Medium | Confirmed | Initial motion was too subtle to be apparent during ordinary scrolling, as reported by the user | Added a sequenced hero intro, a visibly staggered, scrubbed card reveal, and a scroll progress indicator; verified in Chromium |
+| WEB-011 | Navigation | Medium | Confirmed | Clicking a skill from the bottom of the index landed on the detail page at `scrollY=489`, with its hero clipped above the viewport | Reset Vue Router navigation to the top after render; verified at `scrollY=0`, with anchor navigation preserved |
+| WEB-012 | Contrast | Low | Confirmed | Small deep-pink module numbers on white had a contrast ratio of 3.01:1 | Darkened the small-text pink to `#b04d73`, measuring 5.05:1 on white |
 
 ## 6. Requirements
 
@@ -62,24 +65,25 @@ The user asked to refresh the existing Lime site’s colors, move authored appli
 |---|---|---|---|---|
 | FR-001 | The site shall use a solid black, light-pink, and white visual palette. | Must | No green palette or gradient CSS remains in authored site files. | Source scan; desktop/mobile render review |
 | FR-002 | The site shall use Vue SFCs with plain JavaScript for authored app/config/data code. | Must | No authored `.ts`/`.tsx` source, `lang="ts"`, or TypeScript-specific config remains. | Source inventory; `pnpm generate` |
-| FR-003 | The site shall provide calm GSAP scroll reveals and reading progress. | Must | GSAP/ScrollTrigger is dynamically loaded on mount, cleaned up on unmount, and only animated for `prefers-reduced-motion: no-preference`. | Browser smoke check and source review |
+| FR-003 | The site shall provide an apparent GSAP hero intro, staggered scroll-linked card reveals, and reading progress. | Must | Timeline and scrubbed card positions visibly change during scrolling; timelines are cleaned up; reduced motion keeps content visible. | Chromium samples at multiple scroll progress points; reduced-motion emulation |
 | FR-004 | Search shall show an accessible empty state and recover when the query is cleared. | Must | A no-match query shows status text; clearing restores all four cards. | Browser console interaction smoke test |
 | FR-005 | Detail pages shall keep unique SEO URLs and public source links. | Must | Each generated route has its correct canonical/`og:url`; source link resolves under the public repository. | Generated HTML and browser link inspection |
 | FR-006 | GitHub Pages shall show a useful 404 document without client JavaScript. | Must | Root `404.html` has title, `noindex`, error heading, recovery links, and no `<script>` dependency; `200.html` is not shipped. | Finalizer checks and no-JS headless render |
+| FR-007 | Skill and module navigation shall begin detail pages at the top while preserving explicit index anchors. | Must | Clicking a skill or next-module link resets `scrollY` to zero; returning to `/#skills` lands at the index section. | Headless Chromium route test from the bottom of the homepage |
 
 ### Non-functional
 
 | ID | Requirement | Target or constraint | Verification |
 |---|---|---|---|
-| NFR-001 | Honor reduced-motion preferences | Static content remains readable; ScrollTrigger runs only when no reduced-motion preference is active; CSS smooth scrolling is disabled for reduced motion | Source review; OS-level emulation not performed |
-| NFR-002 | Preserve accessible contrast in selected core text pairs | WCAG AA text contrast threshold (4.5:1) for tested pairs | Calculated ratios: 9.27:1–20.01:1 |
+| NFR-001 | Honor reduced-motion preferences | Static content remains readable; ScrollTrigger runs only when no reduced-motion preference is active; CSS smooth scrolling is disabled for reduced motion | Chromium media emulation: hero opacity 1, transform none, cards opacity 1 |
+| NFR-002 | Preserve accessible contrast in selected core text pairs | WCAG AA text contrast threshold (4.5:1) for tested pairs | Calculated ratios include 5.05:1 for `#b04d73` on white and 12.42:1 for light pink on black |
 | NFR-003 | Keep the static build reproducible | Node 22, pnpm 11, frozen lockfile | `pnpm install --frozen-lockfile && pnpm generate` |
 | NFR-004 | Avoid high-severity dependency findings | No known high-severity audit results | `pnpm audit --audit-level=high` |
 
 ## 7. Design, SEO, and accessibility
 
 - Preserve Departure Mono and Handlee; use solid black `#08080a`, pink `#ffb8d2`, white `#ffffff`, and neutral text/lines.
-- No gradients or green UI. Keep the existing layout/content rather than introducing an unrelated redesign.
+- No gradients or green UI. The user’s follow-up explicitly authorized a broader editorial redesign of the hero, module rail, skill cards, and detail pages; preserve core skill content and existing fonts.
 - Public/indexable routes: `/`, `/guidance`, `/web-design`, `/web-engineer`, `/seo-production-audit`.
 - Error route `/404` and root static `/404.html` are `noindex`; neither is listed in the sitemap.
 - Each indexable page gets a unique title/description/canonical/Open Graph URL; no `og:image` is available yet.
@@ -100,7 +104,7 @@ The site is static, with no API, accounts, forms, user-generated HTML, analytics
 
 | Boundary | Constraint | Explicit authorization needed for change? |
 |---|---|---|
-| Visual design | Use the requested black/pink/white solid palette; preserve content and existing font choices | Yes, for broader redesign |
+| Visual design | Use the requested black/pink/white solid palette; preserve core content and existing font choices | Broader editorial redesign explicitly authorized in follow-up |
 | Backend/API/database | No backend or schema; remain static | Yes |
 | Auth/security | No auth or private data | Yes |
 | Deployment | Keep GitHub Pages, `main`, custom domain, and static output | Yes, to change provider/domain |
@@ -138,6 +142,7 @@ The site is static, with no API, accounts, forms, user-generated HTML, analytics
 | FR-004 | Browser test: empty-state text shown; four cards restored |
 | FR-005 | Generated title/canonical/OG URL assertions; correct public source link |
 | FR-006 | `pages/404.vue`; `scripts/finalize-static.mjs`; no-JS headless output test |
+| FR-007 | `app.vue` router `afterEach`; bottom-origin card-click and index-anchor browser tests |
 | NFR-003 | Frozen install and generation |
 | NFR-004 | pnpm dependency audit |
 
@@ -148,5 +153,14 @@ The site is static, with no API, accounts, forms, user-generated HTML, analytics
 - [x] Backend/API/auth/database boundaries were preserved.
 - [x] pnpm and the single lockfile were used consistently.
 - [x] Confirmed route, link, fallback, and workflow findings were addressed.
+- [x] Follow-up browser reproduction confirmed and fixed the bottom-scroll detail-route bug; motion was measured at early, middle, and completed scroll positions.
 - [x] Local build, static metadata, dependency audit, and source checks passed.
 - [x] Policy caveats and not-tested items are recorded in the audit.
+
+## Follow-up verification record (2026-09-27)
+
+- Reproduced the reported bug from the page bottom: card click at index `scrollY=2033` landed on Guidance at `scrollY=489` with the hero clipped to `top=-341`. Fixed and retested to detail `scrollY=0`, hero `top=148`.
+- Verified next-module navigation also resets to zero and `/#skills` lands on the target section.
+- Measured staggered ScrollTrigger card opacity/translation at early, middle, and completed scroll progress; confirmed the hero/card content remains visible in reduced-motion emulation.
+- Confirmed the `SEO` filter shows one matching card, clearing restores four; no browser-console errors. Reviewed desktop and 390px mobile renders.
+- Replaced 3.01:1 small pink-on-white text with a 5.05:1 pink shade. No DNS records/domain settings were touched.

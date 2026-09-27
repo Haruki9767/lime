@@ -62,11 +62,11 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 
 **Accessibility scope:** WCAG 2.2 AA-informed spot checks of the homepage and a representative detail route on 2026-09-27. Desktop and 390px mobile screenshots were reviewed; the real 390px viewport had `scrollWidth === 390`, primary text remained at opacity 1, and all four cards became visible after scrolling. Selected text/background pairs were calculated. This is not a conformance audit. Screen-reader output, full keyboard walkthrough, 200% zoom, touch-target measurements, and a full cross-browser matrix were not tested.
 
-**Contrast calculations:** Pink `#ffb8d2` on black `#08080a`: 12.42:1; white on black: 20.01:1; muted `#b4afb3` on black: 9.27:1; black text on the tested pink/white card surfaces: 12.42:1–20.01:1. These sampled pairs exceed WCAG AA text contrast thresholds; this does not prove every state conforms.
+**Contrast calculations:** Pink `#ffb8d2` on black `#08080a`: 12.42:1; deep-pink utility text `#b04d73` on white: 5.05:1; white on black: 20.01:1; muted `#b4afb3` on black: 9.27:1; black text on the tested pink/white card surfaces: 12.42:1–20.01:1. These sampled pairs exceed WCAG AA text contrast thresholds; this does not prove every state conforms.
 
-**Automated checks:** Source-only web-quality scanner: 0 findings. The anti-slop scanner returned three source-level candidates: translucent separators and a pink status-dot halo were heuristically labeled “glass/repeated shadow”; source/render review confirms they are intentional details, not green or gradients. An earlier scan of generated Nuxt output produced framework-bundle false positives and was not treated as source findings.
+**Automated checks:** Final source-only web-quality scanner: 0 findings. The design scanner flagged translucent separators, the pink status-dot halo, watermark opacity, and the intentional GSAP fallback `console.warn`; source/render review confirms these are small design/diagnostic details, not glass panels, green, or gradients. An earlier scan of generated Nuxt output produced framework-bundle false positives and was not treated as source findings.
 
-**Manual checks:** Desktop/mobile rendering; direct `/guidance/` route; search empty state and recovery to four cards; source link target; generated static 404 with JavaScript disabled; browser console review; initial 390px copy visibility; all four staggered cards visible after scrolling; generated-route main-landmark count; reduced-motion implementation reviewed in CSS/GSAP source but OS preference emulation was not independently exercised.
+**Manual checks:** Desktop/mobile rendering; direct `/guidance/` route; search filter and recovery to four cards; source link target; generated static 404 with JavaScript disabled; browser console review; 390px screenshots; all four staggered cards visible after scrolling; generated-route main-landmark count; headless Chromium reduced-motion media emulation (hero opacity `1`, no transform, cards opacity `1`). A native operating-system setting was not changed.
 
 ## Security and business-logic verification
 
@@ -114,7 +114,7 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 
 | File | Change | Why safe under the stated scope |
 |---|---|---|
-| `app.vue`, `assets/css/main.css` | Black/pink/white solid design; reduced-motion CSS; working global metadata/navigation | Matches the user’s explicit design request |
+| `app.vue`, `assets/css/main.css`, `composables/useScrollAnimations.js` | Black/pink/white editorial redesign; sequenced intro, scroll-linked reveals/progress, post-render route-top reset, and reduced-motion behavior | Implements the user’s explicit visual/motion feedback; no API/data changes |
 | `pages/index.vue`, `pages/[slug].vue`, `pages/404.vue`, `error.vue` | Vue 3 SFC behavior, route metadata, navigation/search/error fixes | No API/data contracts changed; routes remain public |
 | `data/skills.js`, `nuxt.config.mjs`, `composables/useScrollAnimations.js` | Plain JS data/config and SSR-safe GSAP ScrollTrigger composable | Removes authored TypeScript and supports the requested smooth scroll effects |
 | `scripts/finalize-static.mjs`, `package.json` | Creates a no-JS GitHub Pages 404 from Vue-rendered markup; removes unused `200.html` shell | Fixes static fallback behavior for the detected GitHub Pages target |
@@ -127,7 +127,7 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 - `og:image` is still absent; add a branded social image if the owner wants richer link previews.
 - Handlee remains an externally fetched Google Font. Assess whether self-hosting or a notice is appropriate for the site’s actual visitor jurisdictions; this is not legal advice.
 - Live DNS, GitHub Pages repository settings, HTTPS enforcement, response headers, and the live custom 404 HTTP status are not source-verifiable; check the public deployment after the Actions run.
-- No dedicated unit/lint/typecheck scripts exist. Reduced-motion source behavior is present and reviewed, but not exercised with operating-system preference emulation.
+- No dedicated unit/lint/typecheck scripts exist. Reduced-motion behavior was exercised through Chromium media emulation, not by changing a host operating-system preference.
 - Nuxt’s production generation emitted non-blocking upstream Rollup/H3 warnings; generation completed successfully.
 
 ## Sources
@@ -135,6 +135,7 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 - [Vue Composition API lifecycle hooks](https://vuejs.org/api/composition-api-lifecycle.html) — client-only mount and unmount cleanup; accessed 2026-09-27.
 - [GSAP ScrollTrigger documentation](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) — scroll-triggered timeline and progress patterns; accessed 2026-09-27.
 - [Nuxt configuration](https://nuxt.com/docs/4.x/getting-started/configuration) — project config behavior; accessed 2026-09-27.
+- [Nuxt custom routing](https://nuxt.com/docs/4.x/guide/recipes/custom-routing) and [Vue Router scroll behavior](https://router.vuejs.org/guide/advanced/scroll-behavior.html) — router lifecycle and anchor/top scroll behavior; accessed 2026-09-27.
 - [W3C WCAG 2.2: Animation from Interactions](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html) — honor reduced-motion settings; accessed 2026-09-27.
 - [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) — artifact and deploy job permissions; accessed 2026-09-27.
 - [GitHub Pages custom 404](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site) — root `404.html`; accessed 2026-09-27.
@@ -151,3 +152,11 @@ The site is a public, static Nuxt/Vue field guide. The requested palette and Jav
 - [x] Build, metadata, dependency audit, and source scanner results are recorded.
 - [x] The 404 fallback is prerendered and contains no client-script dependency.
 - [x] Branch/remote and post-push synchronization are verified at handoff.
+
+## UX follow-up after user feedback (2026-09-27)
+
+The user reported that motion was not apparent and that skill-card navigation from the bottom of the index began detail pages at the bottom. The prior result was reproduced in headless Chromium: index `scrollY=2033`; after clicking Guidance, detail `scrollY=489` and hero `top=-341`. The Vue Router `afterEach` reset now runs after the page has rendered; the same navigation finishes at detail `scrollY=0`, hero `top=148`. Next-module navigation also finishes at zero, while `/#skills` lands with the index section `86px` below the viewport top.
+
+The motion pass now includes a sequenced split-line hero/rail intro, staggered scrubbed card entrance, and a document progress bar. Computed card values at representative scroll positions show first-card opacity/translation changing near the trigger, later cards following in sequence, and all cards returned to opacity 1 by the end. Search still filters to only “SEO Production Audit” for an `SEO` query and restores all four cards on clear. Reduced-motion media emulation leaves the hero and cards at opacity 1 and removes the hero transform. The desktop and 390px mobile captures were reviewed; no browser-console errors were recorded.
+
+A final contrast spot check corrected deep-pink utility text from 3.01:1 to 5.05:1 on white. Source scans report zero web-quality findings; design-scanner alpha/halo/watermark and `console.warn` signals were reviewed as intentional separators, status styling, watermark treatment, and GSAP fallback logging, not gradients, green UI, or opaque debugging overlays. No DNS records, domain settings, or CNAME values were changed, per the user’s instruction.

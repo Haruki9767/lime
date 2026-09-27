@@ -61,9 +61,9 @@ No environment variables or secrets are required. `runtimeConfig.public.siteUrl`
 
 ## Recent work and verification
 
-- Changed areas: app shell/styles, Vue pages/error handling, JS skill data/Nuxt config, GSAP composable, static finalizer, Pages workflow, audit/PRD/deployment/migration docs.
-- Checks: frozen-lockfile install; `pnpm generate`; five-page title/H1/canonical/OG checks; sitemap validation; 404 no-JS check; one-main error landmarks; search empty/recovery and direct detail route; contrast calculations; `pnpm audit --audit-level=high`; source-only web-quality scan (0 findings); `git diff --check`; real 390px viewport has no overflow, fully visible H1, and all four cards become visible after scroll.
-- Known limitations: no lint/unit/typecheck scripts; full WCAG testing, OS reduced-motion emulation, live DNS/headers, and social image are not covered. See `SEO-SECURITY-AUDIT.md`.
+- Changed areas: editorial app shell and styles, Vue pages/error handling, JS skill data/Nuxt config, GSAP composable, post-render Vue Router scroll reset, static finalizer, Pages workflow, audit/PRD/deployment/migration docs.
+- Checks: frozen-lockfile install; `pnpm generate`; five-page metadata and 404 checks; search filtering and recovery; card and next-module navigation from page bottom resets to `scrollY=0`; `/#skills` anchor lands correctly; measured staggered/scrubbed card motion; reduced-motion emulation leaves content visible; desktop and 390px screenshots; contrast; `pnpm audit --audit-level=high`; source-only scan; `git diff --check`.
+- Known limitations: no lint/unit/typecheck scripts; full WCAG testing, native OS reduced-motion settings, live hosting headers/status, and social image are not covered. Chromium reduced-motion media emulation was performed. DNS records/settings were not touched, per user instruction. See `SEO-SECURITY-AUDIT.md`.
 - Migration/security/privacy notes: Google Fonts remains a third party; see audit. GitHub Pages workflow grants deploy permissions only to its deploy job.
 
 ## Safe next steps
@@ -75,3 +75,7 @@ No environment variables or secrets are required. `runtimeConfig.public.siteUrl`
 ## Handoff rules
 
 Read the current relevant repository skills before acting. Preserve the public routes, static architecture, canonical host, no-green/no-gradient palette, reduced-motion behavior, and script-free 404. Do not introduce backend/API/auth/schema or tracking changes without explicit authorization.
+
+## Follow-up UX verification
+
+The last user feedback was that scroll animations were too subtle and skill-detail navigation inherited the home-page scroll. Both were reproduced and fixed. `app.vue` now waits for Vue Router navigation and render before resetting non-hash destinations to the top; explicit hash links still land at their target. `useScrollAnimations.js` sequences the hero/module intro, staggered card reveal, and scroll progress, keeps initially visible copy legible, honors reduced motion, and cleans up its match-media context. Production browser tests confirmed the bottom-origin detail and next-module routes start at `scrollY=0`, the `/#skills` anchor is correct, search restores all four cards, reduced-motion leaves content visible, and there are no browser-console errors. No DNS changes were made.
