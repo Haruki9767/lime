@@ -5,13 +5,13 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "typecheck": "nuxt typecheck"
+    "generate": "nuxt generate && node scripts/finalize-static.mjs",
+    "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "^4.5.2",
-    "typescript": "^5.6.3",
-    "vue-tsc": "^3.3.11"
+    "nuxt": "^4.5.2"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0"
   }
 }
