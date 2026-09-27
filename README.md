@@ -11,7 +11,7 @@ Reusable, platform-neutral Lime Skills maintained in this repository. Each packa
 
 ## AI setup
 
-Use [`Profile`](./Profile) for the repository boundary and AI working rules. [`requirement.txt`](./requirement.txt) lists the expected runtime and package-manager versions. A portable archive of the four skill entrypoints is available as [`skillmd.zip`](./skillmd.zip).
+Use [`Profile`](./Profile) for the repository boundary and AI working rules. [`tooling.md`](./tooling.md) lists the expected runtime and package-manager versions. A portable archive of the four skill entrypoints is available as [`skillmd.zip`](./skillmd.zip).
 
 ## License
 
