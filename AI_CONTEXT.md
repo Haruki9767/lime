@@ -17,8 +17,8 @@ A Nuxt 4 static site presenting the four reusable skills in this repository: Gui
 ## Design decisions
 
 - Palette: black, dark green, white, and a single acid-green accent; no gradients.
-- Typography: Departure Mono for headings and UI labels; Handlee for paragraphs.
-- Visual language: editorial field guide / terminal index with sharp edges, ruled lines, and restrained motion.
+- Typography: bundled Departure Mono at `lime/public/fonts/DepartureMono-1.500.woff2` for headings and UI labels; Handlee for paragraphs.
+- Visual language: editorial field guide / terminal index with sharp edges, ruled lines, solid black backgrounds, dark-green surfaces, white surfaces, and restrained motion.
 - SEO: canonical HTTPS URLs, explicit page metadata, robots, sitemap, and noindex for errors.
 
 ## Commands
