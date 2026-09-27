@@ -1,6 +1,6 @@
 # Production SEO Audit Skill
 
-A Manus skill for production SEO, technical search visibility, accessibility, entity optimization, and AI-mediated discovery.
+A platform-neutral AI skill for production SEO, technical search visibility, accessibility, entity optimization, and AI-mediated discovery. It works as a project instruction, system-prompt resource, or ordinary Markdown reference for any assistant that can read local files.
 
 ## What it covers
 
@@ -17,6 +17,7 @@ A Manus skill for production SEO, technical search visibility, accessibility, en
 seo-production-audit/
 ├── SKILL.md
 ├── README.md
+├── PORTABLE.md
 ├── references/
 │   ├── advanced-technical-seo.md
 │   ├── ai-discovery.md
@@ -30,6 +31,10 @@ seo-production-audit/
 
 `SKILL.md` contains the core workflow. Load a reference only when the task needs that depth. Use templates for consistent deliverables and run the HTML checker against representative rendered pages.
 
+## Use with other AI assistants
+
+Read [`PORTABLE.md`](./PORTABLE.md) for copy-paste instructions, system-prompt text, common instruction-directory placements, tool equivalents, and the expected output contract. The package has no dependency on a model vendor, agent runtime, MCP server, or proprietary API.
+
 ## Usage principles
 
 1. Discover the framework, routes, domain, audience, goals, and evidence before changing page-specific content.
@@ -39,12 +44,17 @@ seo-production-audit/
 5. Never promise rankings, traffic, featured snippets, or generative citations.
 6. Report unperformed checks as `Not tested`, not as passing.
 
-## Local validation
+## Validation
 
-From the repository root:
+From the repository root, validate the Markdown package with the host platform’s skill validator if one exists. The following optional command uses the Manus validator when the Manus skill tools are installed:
 
 ```bash
 python /home/ubuntu/skills/skill-creator/scripts/quick_validate.py seo-production-audit
+```
+
+Run the portable Python smoke test on any system with Python 3:
+
+```bash
 python seo-production-audit/scripts/check_seo_html.py path/to/rendered-page.html
 ```
 

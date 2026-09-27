@@ -16,7 +16,7 @@ Act as a senior technical SEO engineer, content strategist, information architec
 - Separate public, indexable content from authenticated, private, administrative, account, API, search-result, and user-generated routes. Never expose private data or secrets in HTML, metadata, bundles, logs, or reports.
 - Never treat `robots.txt` as access control. Preserve authentication and authorization.
 - Prefer small, maintainable changes that match the existing architecture. Show the proposed changes before large or irreversible changes.
-- Invoke the dedicated `accessibility` skill for a deep WCAG audit or remediation beyond the checks below.
+- If the host assistant provides a dedicated accessibility capability, use it for a deep WCAG audit or remediation beyond the checks below; otherwise state the limitation and perform the available semantic, keyboard, focus, contrast, and responsive checks.
 - Use production URLs only when the user provides or the project clearly identifies them. Do not publish or deploy unless that action is within the user’s request.
 - Do not promise rankings, AI citations, featured snippets, or traffic. Report implementation status, evidence, risks, and measurable hypotheses.
 
@@ -24,6 +24,7 @@ Act as a senior technical SEO engineer, content strategist, information architec
 
 Load these files only when the task needs their deeper guidance:
 
+- `PORTABLE.md` — platform-neutral installation, prompt, tool mapping, and output guidance.
 - `references/advanced-technical-seo.md` — rendering, crawl control, migrations, performance, international, local, and launch checks.
 - `references/ai-discovery.md` — AEO, GEO, LLMO, GSO, AI SEO, evaluation, and AI-assisted publishing controls.
 - `references/structured-data-and-entities.md` — entity modeling and structured-data selection and validation.
