@@ -11,7 +11,7 @@
 
 Prefer pnpm for JavaScript/TypeScript repositories. Follow the exact `packageManager` or `devEngines.packageManager` declaration in `package.json`, commit `pnpm-lock.yaml`, and use `pnpm install --frozen-lockfile` in CI. This makes manifest/lockfile drift fail instead of silently rewriting dependencies.
 
-Treat one lockfile as authoritative. If npm, pnpm, yarn, or bun lockfiles coexist, inspect them and ask the user when they disagree. Remove or regenerate stale competing lockfiles only with authorization. Never choose a package manager merely because an old lockfile happens to be present.
+Treat one lockfile as authoritative. If npm, pnpm, yarn, or bun lockfiles coexist, inspect them. If their dependency specs disagree and the requested work requires changing that boundary, leave the affected change blocked, continue independent safe work, and queue one concise question for the final question batch. Remove or regenerate stale competing lockfiles only with authorization. Never choose a package manager merely because an old lockfile happens to be present.
 
 Cache pnpm’s store only when useful and key it with `pnpm-lock.yaml` plus relevant OS/runtime dimensions. Treat store and metadata caches as trusted data; do not let untrusted pull requests write caches later restored by trusted jobs. Keep the pnpm version compatible with the lockfile writer.
 

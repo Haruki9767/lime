@@ -1,0 +1,51 @@
+name: Release Skills
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Validate and publish skill release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tagged commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install validator dependency
+        run: python -m pip install --disable-pip-version-check pyyaml
+
+      - name: Validate skill packages and tests
+        run: |
+          set -eu
+          python guidance/scripts/check_skill_repo.py
+          python -m unittest discover -s tests -v
+          python -m compileall -q guidance seo-production-audit web-design web-engineer tests
+
+      - name: Verify the committed skill archive is current
+        run: |
+          set -eu
+          python guidance/scripts/build_skill_archive.py
+          git diff --exit-code -- skillmd.zip
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: skillmd.zip
+          fail_on_unmatched_files: true

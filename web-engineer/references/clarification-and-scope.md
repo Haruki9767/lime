@@ -1,57 +1,51 @@
 # Clarification and Scope Rules
 
-## Table of contents
+Use the shared [`../../guidance/references/final-questions.md`](../../guidance/references/final-questions.md) protocol. This file adds engineering-specific boundaries; it is not a questionnaire to send wholesale.
 
-1. [Ask before acting](#ask-before-acting)
-2. [Preference intake](#preference-intake)
-3. [Design-preservation rule](#design-preservation-rule)
-4. [Backend and trust-boundary rule](#backend-and-trust-boundary-rule)
-5. [Policy readiness](#policy-readiness)
-6. [Assumptions and stop conditions](#assumptions-and-stop-conditions)
+## 1. Inspect, scope, and queue
 
-## Ask before acting
+- Read the request, existing conversation, repository instructions, code, tests, and deployment config before asking the user anything. Reuse every applicable answer already given.
+- Ask only about missing information that changes the specific code, content, test, or deployment work in scope. Do not ask about untouched design, framework, backend, analytics, legal, or operations topics.
+- Prefer existing project behavior and configuration as the default. Preserve architecture, UI, data, API contracts, auth, dependencies, and deployment behavior unless change is requested.
+- Queue non-urgent questions and ask them together after completing and verifying safe independent work. If a question blocks one slice, leave that slice unchanged and continue other authorized work.
+- Ask earlier only if no useful safe work can proceed without an answer or proceeding would cross a security, privacy, legal, deployment, destructive-change, financial, or other consequential boundary. Ask one concise batch, not repeated single questions.
 
-Ask one concise consolidated question and pause when any of these are missing and materially affects the result:
+## 2. Candidate questions (select only if applicable)
 
-- repository or website target;
-- requested operation: audit, report, fix, build, workflow, PRD, commit, or push;
-- permission to modify or push;
-- route indexability, authentication, or data-handling policy;
-- framework/version and package-manager choice where lockfiles conflict;
-- font, brand, design direction, references, and accessibility target;
-- whether design, backend, API, database, auth, or deployment configuration may change.
+- **Target and operation:** repository/site or requested deliverable only when not identifiable from the request.
+- **Permission:** modification, deployment, push, or an external action only when it was not already requested or authorized and the action needs it.
+- **Framework/package manager:** only for a new project, requested stack change, or a real lockfile/runtime conflict; otherwise follow the healthy declared stack.
+- **Visual preferences:** only when creating or changing visual design. Do not ask for fonts, layout, color, or references during design-preserving, backend-only, docs-only, or SEO-only work.
+- **Routes, content, and SEO:** ask about indexability, canonical host, audience, market, copy, or business facts only if the requested implementation depends on the missing value. A structural audit can proceed without inventing any of these.
+- **Backend/API/data/auth/deployment:** ask only for contract, ownership, provider, migration, auth, rollout, privacy/retention, or environment-variable **names** required for an actual in-scope change. Never ask for secret values in chat.
+- **Policy:** surface privacy, cookie, terms, and legal review only when observed processing/business behavior makes it relevant; do not request jurisdiction details for work that does not rely on a legal conclusion.
+- **Release or push target:** ask for branch, remote, or version only if it is genuinely ambiguous and required by the requested action.
 
-Use `TBD` in reports only after the user has authorized a report despite missing information. Do not use `TBD` as a reason to make an implementation guess.
-
-## Preference intake
-
-Before making a web experience, collect and follow the framework/version, font preferences and fallbacks, visual taste, layout/density, color, motion, imagery, examples the user likes/dislikes, audience, product goal, responsive behavior, and accessibility expectations. Search for the current `web-design` skill before visual/frontend work; if absent, record that it was searched for and unavailable.
-
-## Design-preservation rule
+## 3. Design-preservation rule
 
 Treat layout, spacing, typography, colors, imagery, animation, responsive breakpoints, interaction behavior, visible copy, brand identity, API contracts, database schema, authentication, authorization, cookies, encryption, secrets, hosting, routing, build output, and deployment bindings as protected by default.
 
 SEO metadata, crawler files, static 404 pages, semantic labels, tests, documentation, and CI are usually safe additions, but inspect context first. Do not make visual changes while claiming “no design changes.”
 
-## Backend and trust-boundary rule
+## 4. Backend and trust-boundary rule
 
-Never make a private route public, relax CORS, remove authentication, expose a database, trust client-calculated business values, or move an authorization check to the client to improve SEO or make a check pass. Report the boundary and ask for explicit authorization if a backend change is actually required.
+Never make a private route public, relax CORS, remove authentication, expose a database, trust client-calculated business values, or move an authorization check to the client to improve SEO or make a check pass. If an actual backend change requires missing authorization or configuration, leave that slice untouched and queue the specific blocking question; continue independent work where safe.
 
-## Policy readiness
+## 5. Policy readiness
 
 Flag the likely need for privacy, cookie, terms, consent, retention, deletion, or legal review based on observed data practices and business model. Do not claim a policy is legally required without jurisdiction-specific evidence. A privacy notice is commonly relevant to personal-data processing; cookie consent may apply to non-essential device storage/access; terms are commonly relevant to accounts, contracts, paid services, user content, and sales.
 
-## Assumptions and stop conditions
+## 6. Assumptions and stop conditions
 
-Record assumptions in the audit and PRD. Stop and ask instead of guessing when:
+Use existing project evidence and reversible defaults when safe; state material assumptions in the report. Leave only the affected change blocked and queue a question instead of guessing when:
 
-- the repository has `package-lock.json` and `pnpm-lock.yaml` with different dependency specs;
-- the package-manager version is not declared or is incompatible with the lockfile;
-- a URL is supplied but its ownership or canonical status is unclear;
+- the repository has conflicting `package-lock.json` and `pnpm-lock.yaml` dependency specifications;
+- the package-manager version is undeclared or incompatible with the lockfile;
+- a URL’s ownership or canonical status is unclear and a requested change depends on it;
 - a page could be public or private;
-- a finding could require a breaking dependency or framework upgrade;
-- a proposed fix could alter appearance, runtime behavior, security posture, or policy behavior;
-- a cookie/consent recommendation depends on unknown jurisdictions or processing purposes;
-- the user asks to push but the target branch/remote is unclear.
+- a proposed fix needs a breaking dependency/framework upgrade;
+- a proposed fix could materially alter appearance, runtime behavior, security posture, or policy behavior;
+- cookie/consent guidance depends on unknown jurisdictions or processing purposes;
+- a requested push/release target is genuinely unclear.
 
-A safe final report distinguishes **confirmed**, **review signal**, **not tested**, **assumption**, **legal review needed**, and **blocked**.
+Do not stop unrelated safe work. Run final verification, fix authorized failures, and rerun affected checks before reporting. Distinguish **confirmed**, **failed**, **not tested**, **assumption**, **legal review needed**, **blocked**, and **question**. Put all remaining applicable questions together at the end; omit irrelevant questions.

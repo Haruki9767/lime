@@ -89,7 +89,7 @@ Define PR and default-branch triggers, least-privilege permissions, pnpm-first f
 
 ## 13. Open questions and assumptions
 
-Record missing information here, but ask the user before implementation when the answer would materially change scope, security, design, indexability, package-manager choice, policy, or deployment behavior.
+Record assumptions and only the missing information that affects work actually in scope. Follow `guidance/references/final-questions.md`: complete and verify safe independent work, then present remaining questions together at the end. Keep any materially blocked or unauthorized implementation slice unchanged until answered; do not ask about untouched areas or repeat an answer already supplied.
 
 - [Question or assumption marked TBD]
 

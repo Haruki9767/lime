@@ -8,6 +8,8 @@ Place this directory in the project’s instructions or skills directory, then t
 
 > Read `seo-production-audit/SKILL.md` and apply it to this project. Load only the references needed for the current task. Use the report template for the final audit and mark unavailable checks as `Not tested`.
 
+Use [`guidance/references/final-questions.md`](../guidance/references/final-questions.md) when available: inspect first, ask only about information needed for SEO work actually in scope, finish and verify safe independent work, and put any remaining questions together at the end. Do not ask about untouched design, framework, backend, or analytics topics.
+
 Common locations include `.ai/skills/`, `.agents/skills/`, `.claude/skills/`, `.cursor/rules/`, `.github/`, or a project-specific `docs/` directory. Follow the host assistant’s documented instruction-file conventions.
 
 ## Option 2: Paste as a system or project prompt
@@ -15,12 +17,12 @@ Common locations include `.ai/skills/`, `.agents/skills/`, `.claude/skills/`, `.
 Use this prompt with any assistant that can read local files:
 
 ```text
-You are conducting a production SEO, accessibility, and AI-discovery audit. Read seo-production-audit/SKILL.md first. Inspect the project before proposing changes. Load references/advanced-technical-seo.md for deep technical audits, references/ai-discovery.md for AEO/GEO/LLMO/GSO/AI SEO work, and references/structured-data-and-entities.md for schema or entity work. Use templates/seo-audit-report.md for the report and templates/ai-discovery-test-matrix.md for repeatable generative-search observations. Never invent facts, claims, reviews, authors, prices, locations, citations, or schema values. Distinguish public indexable routes from private routes. Treat robots.txt as a crawl preference, not access control. Report evidence, limitations, and unperformed checks explicitly. Do not promise rankings or citations.
+You are conducting a production SEO, accessibility, and AI-discovery audit. Read seo-production-audit/SKILL.md first. Inspect the project before proposing changes. Load references/advanced-technical-seo.md for deep technical audits, references/ai-discovery.md for AEO/GEO/LLMO/GSO/AI SEO work, and references/structured-data-and-entities.md for schema or entity work. Use templates/seo-audit-report.md for the report and templates/ai-discovery-test-matrix.md for repeatable generative-search observations. Never invent facts, claims, reviews, authors, prices, locations, citations, or schema values. Distinguish public indexable routes from private routes. Treat robots.txt as a crawl preference, not access control. Ask only about missing information needed for the specific SEO work requested; continue a structural audit without inventing facts. Complete safe checks first and include unresolved applicable questions together at the end. Report evidence, limitations, and unperformed checks explicitly. Do not promise rankings or citations.
 ```
 
 ## Option 3: Use manually
 
-Ask the assistant to read `SKILL.md`, answer the intake questions, inspect the repository and rendered HTML, then produce the report. References are ordinary Markdown and can be attached or pasted into assistants that cannot browse local files.
+Ask the assistant to read `SKILL.md`, inspect the repository and rendered HTML, complete safe structural checks, and include only scope-relevant unresolved questions at the end of the report. References are ordinary Markdown and can be attached or pasted into assistants that cannot browse local files.
 
 ## Tool mapping
 

@@ -28,7 +28,7 @@ Before changing files, classify the request as **frontend-only**, **backend-only
 
 A feature is frontend-only only when it can be completed without changing server code, API contracts, authentication/authorization, database schema/data, storage, secrets, background jobs, webhooks, or server-side rendering behavior. A feature is backend-required if it needs new or changed data, server validation, permissions, business rules, API endpoints, persistence, secrets, integrations, webhooks, or deployment configuration. Treat uncertain work as hybrid until proven otherwise.
 
-If backend or hybrid work is required, stop before editing and ask the user for backend configuration and authorization. Request only the information needed: backend/runtime and version, API contract or endpoint ownership, database/provider and migration policy, authentication and authorization model, environment variable **names** and safe local/test values (never request secrets in chat), storage/queue/webhook providers, deployment target, data retention/privacy constraints, rate limits, and whether schema/API changes are approved. Do not invent a database, auth provider, endpoint, secret, migration, or production configuration.
+If backend or hybrid work is required, do not edit the affected backend slice until its required configuration and authorization are clear. Queue only missing details that materially affect that in-scope change, such as runtime, API ownership/contract, database and migration policy, auth model, environment-variable **names**, provider, deployment target, retention, or rate limits. Never request secret values in chat. Continue independent safe work, then ask the queued questions together at the end. Ask earlier only if no useful safe work can proceed or proceeding would cross a security, privacy, destructive-change, or deployment boundary. Do not ask for backend details when backend is untouched.
 
 If the feature is genuinely frontend-only, continue with a typed/mock boundary where appropriate, document that no backend contract changed, and do not smuggle client-side checks in as security controls.
 
@@ -64,7 +64,7 @@ For application or project work that modifies files, create or update `TODO.md` 
 
 Start with a design and behavior skeleton: route map, page/frame hierarchy, content blocks, component boundaries, data states, API seams, permissions, and responsive structure. Use real semantic elements and representative content, but keep styling intentionally plain. Confirm the skeleton supports the primary task, correct navigation, states, and backend boundary before adding fonts, imagery, polished tokens, animation, glassmorphism, skeuomorphism, or other visual treatments.
 
-Then refine in checkpoints: structure and behavior first; design direction and tokens second; responsive/accessibility/error states third; performance, polish, and specialist audits last. Keep each checkpoint runnable and reversible. Ask the user before a material design, backend, schema, API, auth, deployment, or dependency decision.
+Then refine in checkpoints: structure and behavior first; design direction and tokens second; responsive/accessibility/error states third; performance, polish, and specialist audits last. Keep each checkpoint runnable and reversible. Do not make a material design, backend, schema, API, auth, deployment, or dependency choice without authorization. Queue any necessary decision for the consolidated final question list; continue independent work and leave only the affected slice blocked.
 
 ## 7. Document migrations, deployment, and large changes
 
@@ -82,8 +82,8 @@ Never put secrets, tokens, private customer data, or copied credentials in `AI_C
 
 ## 9. Verification workflow
 
-1. Read the current relevant skills and repository contribution rules.
-2. Classify frontend/backend/hybrid and collect backend configuration before backend work.
+1. Read the current relevant skills and repository contribution rules, including `references/final-questions.md` when user input may be needed.
+2. Classify frontend/backend/hybrid; request backend configuration only for backend changes actually in scope, using the consolidated question protocol.
 3. Inventory files, routes, data flows, trust boundaries, scripts, tests, lockfiles, and workflows.
 4. For file-changing application/project work, create or update the project-root `TODO.md` before implementation and keep its progress current.
 5. Write or update `AI_CONTEXT.md` for a substantial task and a migration document when the change qualifies.
@@ -92,7 +92,8 @@ Never put secrets, tokens, private customer data, or copied credentials in `AI_C
 8. Verify honeypot/challenge behavior server-side, accessibility, rate limits, error states, API status/schema compatibility, and secret redaction when abuse protection is in scope.
 9. Re-read `web-design`, `web-engineer`, and `seo-production-audit` after implementation when relevant; fix the findings that are within the approved scope, and re-run affected checks.
 10. Before handoff, finalize `TODO.md` and append the verified file/change/test summary to `CHANGES.md` for application/project work.
-11. Inspect the diff, verify docs and files exist, check for secrets/generated artifacts, and report what was verified, what was not, and remaining decisions.
+11. Inspect the diff, verify docs and files exist, check for secrets/generated artifacts, run the final relevant checks, fix and rerun authorized failures, and report verified results, failed/not-tested checks, assumptions, and any genuinely blocked decisions.
+12. Put remaining applicable questions in one **Questions for you** section at the end. Ask only about missing decisions that affect work actually touched; omit untouched areas and never repeat an answered question. If none remain, say no reply is needed.
 
 ## References and templates
 
@@ -103,6 +104,7 @@ Never put secrets, tokens, private customer data, or copied credentials in `AI_C
 - `templates/project-quality.yml` — provider-neutral project quality workflow to adapt after inspecting an existing CI setup.
 - Project-root `TODO.md` and `CHANGES.md` — live progress and append-only record of completed work for application/project changes.
 - `scripts/check_skill_repo.py` — deterministic validation used by this repository’s GitHub workflow.
+- `references/final-questions.md` — scope-filtered question bank and end-of-task clarification/verification protocol.
 
 ## Completion checklist
 

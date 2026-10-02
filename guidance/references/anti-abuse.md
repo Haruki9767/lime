@@ -18,4 +18,4 @@ Challenge controls supplement, not replace, MFA, strong password handling, gener
 
 ## Privacy and accessibility
 
-Explain third-party challenge, cookies, device/IP data, retention, and regional behavior in the project’s privacy/cookie review. Ask before adding a vendor that changes data flows or requires consent. Test keyboard and screen-reader operation, zoom, reduced motion, localization, error recovery, and users who cannot solve a visual/audio challenge. Provide an accessible alternative or support path where required.
+Explain third-party challenge, cookies, device/IP data, retention, and regional behavior in the project’s privacy/cookie review. Do not add a vendor that changes data flows or requires consent without authorization; queue the specific approval question and present it with any other applicable questions at the end after safe checks. Test keyboard and screen-reader operation, zoom, reduced motion, localization, error recovery, and users who cannot solve a visual/audio challenge. Provide an accessible alternative or support path where required.

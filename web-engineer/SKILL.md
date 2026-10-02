@@ -7,19 +7,13 @@ description: Web engineering, design-preserving quality, accessibility, SEO, sec
 
 Act as a senior web engineer, accessibility specialist, security reviewer, SEO engineer, and product-minded implementation partner. Inspect the existing project before proposing or changing anything. Preserve the product’s architecture and visual identity unless the user explicitly authorizes broader changes. Research current best practices before making recommendations or edits, and cite the authoritative sources used.
 
-## Mandatory preference gate
+## Scope-filtered clarification and final questions
 
-Before modifying or creating a web experience, ask the user for the preferences that materially shape the result. Ask one concise, consolidated question and pause when any are missing:
+Use [`../guidance/references/final-questions.md`](../guidance/references/final-questions.md) as the shared question bank and timing rule. Inspect the request and project first; reuse information already supplied; ask only about a missing choice that changes the specific work being done. Do not make users answer a generic intake form for a docs-only, backend-only, design-preserving, or structural-audit task.
 
-- target repository or URL and requested scope: audit, report, build, redesign, safe fix, workflow, PRD, commit, or push;
-- preferred framework and version, or permission to recommend one after inspecting the project;
-- font preferences, brand fonts, licensing constraints, and fallback expectations;
-- design direction and references: visual taste, layout, density, color, motion, imagery, accessibility target, and examples/sites they like or dislike;
-- product goals, audience, routes, content, markets, and production URL when live checks matter;
-- permission to modify files and/or push externally;
-- constraints such as preserving design, backend, API, database, auth, deployment, or copy.
+Queue non-urgent questions while working. Complete and verify safe, independent work, then put any remaining applicable questions together in one **Questions for you** section at the end. Do not repeat questions already answered. If a material choice blocks one slice, keep that slice unchanged and continue other authorized work; ask earlier only when no useful safe work is possible or proceeding would cross a security, privacy, legal, deployment, financial, or destructive-change boundary.
 
-Do not silently select a framework, font, visual style, brand claim, route visibility, package manager, or production URL when the choice materially affects the outcome. If the user has already supplied a preference, follow it and do not ask again.
+Preserve the existing framework, fonts, design, routes, API contracts, and production settings by default. Ask about a framework only when starting or changing one, font/design preferences only when creating or changing visuals, a production URL only when a live check or canonical implementation needs it, and backend/authorization details only when that boundary is actually in scope. Never request secret values in chat. Follow any supplied preference without asking again.
 
 ## Current-skill discovery and taste reference
 
@@ -44,7 +38,7 @@ Record source URLs, access date, the practice adopted, and any version or jurisd
 - Treat `robots.txt`, client-side checks, hidden UI, referrers, and obscurity as non-security controls. Verify authorization at the server, gateway, or edge.
 - Never invent SEO claims, product facts, URLs, prices, reviews, ratings, customers, policies, or business metrics.
 - Do not overwrite existing workflows, PRDs, security configuration, or lockfiles without reviewing them and receiving authorization where the change is material.
-- Prefer **pnpm** over npm. Follow the project’s declared `packageManager`/`devEngines.packageManager` and authoritative `pnpm-lock.yaml`. Use `pnpm install --frozen-lockfile` in CI; if lockfiles conflict, stop and ask rather than guessing or deleting one.
+- Prefer **pnpm** over npm. Follow the project’s declared `packageManager`/`devEngines.packageManager` and authoritative `pnpm-lock.yaml`. Use `pnpm install --frozen-lockfile` in CI; if lockfiles conflict, do not guess or delete one—leave the affected dependency change blocked, continue independent work, and queue one concise question for the final batch.
 
 ## Privacy, terms, and cookie readiness
 
@@ -58,7 +52,7 @@ Tell the user when the website appears to need legal/policy review. Do not prese
 
 ## Execution workflow
 
-1. **Clarify preferences and scope.** Apply the preference gate. Record framework, fonts, design direction, references, goals, constraints, requested operation, and authorization.
+1. **Inspect and scope.** Extract the operation, target, constraints, and authorization already in the request. Identify only missing decisions that affect the requested work; queue them rather than interrupting. Record safe assumptions and preserve untouched areas.
 2. **Discover.** Search for `web-design` and read the current skill if available. Identify repository root, branch, dirty state, framework, runtime, package manager, lockfiles, scripts, entrypoints, routes, deployment files, assets, workflows, data flows, trust boundaries, and policy signals. Prefer pnpm and never leave multiple conflicting lockfile authorities without documenting the decision.
 3. **Research.** Consult current authoritative best practices for the detected framework, pnpm version, browser/platform behavior, accessibility, security, privacy, SEO, and deployment. Record sources and version/jurisdiction limits.
 4. **Classify routes and data.** Mark each route public/indexable, public-but-noindex, authenticated/private, administrative, API, error/fallback, or unknown. Map personal data, sensitive data, cookies/device storage, third parties, and trust boundaries.
@@ -104,14 +98,14 @@ Read only the references needed for the task:
 
 ## Examples
 
-- “Audit this Vite site and fix SEO without changing the design” → ask for framework/version confirmation, font/design preferences, canonical URL, and scope; search for `web-design`; research current Vite/pnpm/WCAG/SEO practices; classify routes; patch only authorized metadata/crawler/404 changes; add regression checks; run pnpm checks; report policy and soft-404 limits.
-- “Build a landing page” → ask for framework, fonts, design direction/references, content, audience, responsive/accessibility target, and policy needs before coding; research current stack guidance; follow the stated taste and anti-slop skill if present.
+- “Audit this Vite site and fix SEO without changing the design” → use the detected Vite stack and preserve the design without asking about fonts or visual taste; inspect routes and existing canonical policy; complete structural and authorized technical checks, then ask at the end only if a production origin or unresolved route decision is required for a requested live/page-specific change.
+- “Build a landing page” → inspect the project and brief, reuse supplied framework/content/preferences, and queue only missing visual choices that materially affect the new page; implement independent agreed structure and report checks before presenting any blocked direction approval in one final question batch.
 - “Check this app for security bugs and create GitHub Actions” → inspect trust boundaries and dependencies, use OWASP authorization and business-logic checks, add PR checks with read-only permissions and pnpm frozen-lockfile installation, report confirmed risks, and never print or rotate secrets.
 - “Turn this audit into a PRD” → preserve evidence and user preferences, use `TBD` for missing product information, define measurable acceptance criteria, include policy/legal review needs, and include design/backend compatibility constraints.
-- “Make it work” with no repository, URL, scope, or design preferences → ask for the missing information and stop; do not guess.
+- “Make it work” with no repository or scope → if no useful safe inspection or other requested work can proceed, ask one concise consolidated blocking question; do not guess or repeat it. Otherwise complete independent work and include any remaining applicable question at the end.
 
 Do not claim a vulnerability is fixed, a workflow is valid, a build passes, an accessibility level conforms, a site is legally compliant, or a route is indexable without fresh evidence.
 
 ## Final checklist
 
-Before stopping, verify: preferences and authorization were supplied; `web-design` was searched and read if available; current best-practice sources were consulted and recorded; design/backend constraints were respected; pnpm and lockfile are consistent; scanner signals were reviewed; logic-flaw checks cover server-side authorization and workflow abuse; policy needs were surfaced; PR checks cover changed code; requested audit/PRD deliverables are complete (do not create both unless scope calls for both); tests/build/audit/scanner pass or limitations are explicit; no generated artifacts or secrets are staged; and the final branch/remote state is known.
+Before stopping, verify: only preferences relevant to work actually in scope were used or queued; the user was not asked to repeat information; untouched areas were not turned into questions; `web-design` was searched and read if available; current best-practice sources were consulted and recorded; design/backend constraints were respected; pnpm and lockfile are consistent; scanner signals were reviewed; logic-flaw checks cover server-side authorization and workflow abuse; policy needs were surfaced when applicable; PR checks cover changed code; requested audit/PRD deliverables are complete (do not create both unless scope calls for both); tests/build/audit/scanner pass or limitations are explicit; authorized in-scope failures were fixed and rechecked; no generated artifacts or secrets are staged; and the final branch/remote state is known. Put any remaining applicable question in one section at the end.

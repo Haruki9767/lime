@@ -4,7 +4,7 @@ Re-check these official sources when versions, browser behavior, or project cons
 
 ## Framework choice
 
-Keep a healthy existing stack unless a concrete requirement justifies migration. Prefer React when the project needs its library/ecosystem breadth, existing React systems, integrations, or React Native strategy; prefer Vue when an integrated, progressive framework, HTML/CSS/JavaScript templates, Single-File Components, and incremental adoption fit better. Compare SSR/SSG, SEO, bundle/performance budgets, routing/data choices, hosting, testing, accessibility, team skill, and maintenance. There is no universal winner; ask or prototype the riskiest route when uncertain.
+Keep a healthy existing stack unless a concrete requirement justifies migration. Prefer React when the project needs its library/ecosystem breadth, existing React systems, integrations, or React Native strategy; prefer Vue when an integrated, progressive framework, HTML/CSS/JavaScript templates, Single-File Components, and incremental adoption fit better. Compare SSR/SSG, SEO, bundle/performance budgets, routing/data choices, hosting, testing, accessibility, team skill, and maintenance. There is no universal winner; prototype the riskiest route when safe, then queue an outcome-changing stack question for the final batch only when a stack choice is actually in scope.
 
 Sources:
 
